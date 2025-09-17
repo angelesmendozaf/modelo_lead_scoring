@@ -50,7 +50,7 @@ Opción 1: con ejemplo integrado
 python predict_lead_balanced.py --model model_test_v3.joblib 
 
 Opción 2: pasando un JSON con datos del lead
-python predict_lead_db.py --model model_db.joblib --json lead_alto.json
+python predict_lead_balanced.py --model model_test_v3.joblib --json lead_bajo.json        -- cambiar el alto/bajo/medio
 
 Ejemplo de salida esperada
 Score: 82.50

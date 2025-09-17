@@ -46,7 +46,7 @@ def main(args):
         with open(args.json, "r", encoding="utf-8") as f:
             lead = json.load(f)
     else:
-        # Ejemplo integrado (alineado con las columnas del dataset)
+      
         lead = {
            "edad": 45,
   "genero": 1,
