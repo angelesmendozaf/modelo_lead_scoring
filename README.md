@@ -30,7 +30,7 @@ lead_alto.json / lead_medio.json / lead_bajo.json → ejemplos de leads para pro
 
 Ejecutar en consola:
 
-python train_model_db.py --data dataset_training_es_v3_db.csv --output model_db.joblib
+python .\train_logistic_model.py --data ".\dataset_training_es_v3.csv" --output ".\model_test_v3.joblib"
 
 
 Esto:
@@ -47,7 +47,7 @@ Guarda el modelo en model_db.joblib.
 
 🔮 Predecir leads
 Opción 1: con ejemplo integrado
-python predict_lead_db.py --model model_db.joblib
+python predict_lead_balanced.py --model model_test_v3.joblib 
 
 Opción 2: pasando un JSON con datos del lead
 python predict_lead_db.py --model model_db.joblib --json lead_alto.json
