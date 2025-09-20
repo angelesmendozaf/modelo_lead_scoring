@@ -1,66 +1,113 @@
-📄 README.md
-# 🧪 Lead Scoring / Cross-Selling (Prueba)
+# Lead Scoring & Cross-Selling ML
 
-Este repositorio contiene un ejemplo **de prueba** de un modelo de *Lead Scoring* para cross-selling de productos de seguros.  
-El objetivo es experimentar cómo entrenar un modelo supervisado, guardar el modelo entrenado en `.joblib`, y luego usarlo para predecir si un lead es **apto** para una recomendación.
+Este proyecto implementa un sistema de **Lead Scoring** y **Cross-Selling** utilizando **Python** y **Machine Learning**, con el objetivo de analizar leads de una compañía de seguros, predecir la probabilidad de conversión y estimar ingresos adicionales a partir de productos relacionados.
+
+## Estado del proyecto
+
+El proyecto está en desarrollo activo. Actualmente incluye:
+- Generación de datasets sintéticos realistas (con Faker y NumPy).
+- Preprocesamiento de datos para ML.
+- Entrenamiento de modelos supervisados.
+- Exportación del modelo entrenado en formato `.joblib`.
+- Scripts para predicción de nuevos leads.
 
 ---
 
-## ⚙️ Instalación de dependencias
+## Estructura
 
-Asegúrate de tener **Python 3.9+** instalado.  
-Luego, en la terminal ejecuta:
+    └── main/
+        ├── /csv/                                   # Datasets generados
+        ├── /leads/                                 # Modelos de prueba para comparaciones 
+        ├── /models/                                # Modelos entrenados en formato .joblib 
+        ├── generate_dataset.py                     # Generador de datasets
+        ├── predict_lead_balanced.py                # Script para hacer predicciones con leads nuevos v1
+        ├── predict_customer_scoring.py             # Script para hacer predicciones con leads nuevos v2
+        ├── train_logistic_model.py                 # Script de Regresión Logística balanceada
+        ├── train_modelv2.py                        # Script de entrenamiento de modelos v2
+        ├── requeriments.txt                        # Dependencias
+        └── README.md                               # Documentación del proyecto 
 
-```bash
-pip install pandas scikit-learn joblib
+---
 
-📂 Archivos principales
+## Tecnologías utilizadas
 
-train_model_db.py → entrena el modelo (Regresión Logística balanceada).
+- **Python 3.10+**
+- **Faker** para generación de datos sintéticos
+- **Pandas** y **NumPy** para manipulación de datos
+- **Scikit-learn** para entrenamiento y evaluación de modelos
+- **Joblib** para serializar modelos
 
-predict_lead_db.py → carga el modelo y predice el score de un lead.
+---
 
-dataset_training_es_v3_db.csv → dataset de entrenamiento (ejemplo).
+## Cómo empezar
 
-model_db.joblib → archivo del modelo entrenado.
+1.  **Clona el repositorio**
 
-lead_alto.json / lead_medio.json / lead_bajo.json → ejemplos de leads para probar.
+    ```bash
+    git clone https://github.com/angelesmendozaf/modelo_lead_scoring
+    ```
 
-🏋️ Entrenar el modelo
+2.  **Abrir el proyecto**
 
-Ejecutar en consola:
+    ```bash
+    python -m venv venv
+    source venv/bin/activate     # Linux/Mac
+    venv\Scripts\activate        # Windows
+    ```
 
-python .\train_logistic_model.py --data ".\dataset_training_es_v3.csv" --output ".\model_test_v3.joblib"
+3. Instalar dependencias
 
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-Esto:
+---
 
-Lee el dataset de entrenamiento.
+## Uso del proyecto
 
-Divide en train/test (80/20 estratificado).
+### 🔹Generar dataset
 
-Entrena un modelo de Regresión Logística con class_weight="balanced".
+En caso de no tener ningun dataset generado. Ejecutar el generador de datos:
 
-Muestra métricas en consola (Accuracy, Recall, F1, AUC, matriz de confusión).
+    ```bash
+    python generate_dataset.py
+    ```
 
-Guarda el modelo en model_db.joblib.
+Esto creará un CSV dentro de ./csv/.
 
-🔮 Predecir leads
-Opción 1: con ejemplo integrado
-python predict_lead_balanced.py --model model_test_v3.joblib 
+### 🔹Entrenar el modelo
 
-Opción 2: pasando un JSON con datos del lead
-python predict_lead_balanced.py --model model_test_v3.joblib --json lead_bajo.json        -- cambiar el alto/bajo/medio
+Se selecciona un Script de entrenamiento para comenzar con el dataset ya listo.
+Ejemplo de uso:
 
-Ejemplo de salida esperada
-Score: 82.50
-Banda: Recomendación fuerte
-¿Apto?: Sí
-Producto recomendado: Hogar
+    ```bash
+    python train_modelv2.py --data "./csv/dataset_cross_selling_completo.csv" --output "./models/scoring_model_v2.joblib"
+    ```
+    
+Opciones disponibles:
+* --data: ruta al dataset de entrada
+* --output: ruta donde guardar el modelo entrenado
 
-📌 Notas
+### 🔹Calcular score de cliente
 
-Este repositorio es solo una prueba/POC (Proof of Concept).
+Ejemplo de uso:
 
-El modelo y dataset son experimentales.
+    ```bash
+    python predict_customer_scoring.py --model ".\models\scoring_model_v2.joblib" --json-file ".\leads\lead1.json"
+    ```
+    
+Opciones disponibles:
+* --model: ruta al modelo de entrada
+* --jason-file: ruta del cliente a consultar
 
+---
+
+## Permisos y requisitos
+
+Este proyecto no requiere permisos especiales, solo:
+* **Python 3.10+**
+* Librerías listadas en requirements.txt
+
+### Próximos pasos:
+* Añadir validaciones más estrictas en la generación de dataset.
+* Mejorar la calibración del modelo de probabilidad.
