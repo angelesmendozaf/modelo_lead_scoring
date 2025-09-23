@@ -1,0 +1,21 @@
+{
+  "edad": 45,
+  "genero": "Masculino",
+  "hijos": 2,
+  "ocupacion": "empleado",
+  "antiguedad_cliente": 8,
+  "cantidad_polizas": 1,
+  "tiene_auto": 1,
+  "tiene_hogar": 0,
+  "tiene_vida": 0,
+  "tiene_salud": 0,
+  "tiene_accidentes": 0,
+  "tiene_mascotas": 0,
+  "tiene_riesgos": 0,
+  "pagos_atrasados_12m": 1,
+  "cuotas_cumplidas": 10,
+  "cuotas_impagas": 2,
+  "ratio_cuotas_cumplidas": 0.83,
+  "cantidad_siniestros": 1,
+  "dias_desde_ultimo_siniestro": 400
+}
