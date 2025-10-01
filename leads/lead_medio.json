@@ -1,0 +1,23 @@
+{
+  "edad": 35,
+  "genero": "femenino",
+  "hijos": 2,
+  "vivienda_propia": 1,
+  "posee_auto": 1,
+  "antiguedad_cliente": 24,
+  "cantidad_polizas": 2,
+  "cuotas_impagas": 0,
+  "costo_mensual_total_seguro": 12000,
+  "suma_asegurada_total": 2500000,
+  "prima_promedio": 6000,
+  "tiene_auto": 1,
+  "tiene_hogar": 0,
+  "tiene_vida": 0,
+  "tiene_salud": 0,
+  "cantidad_siniestros": 0,
+  "monto_promedio_siniestros": 0,
+  "dias_desde_ultimo_siniestro": 999,
+  "ocupacion": "empleado",
+  "estado_civil": "casado",
+  "provincia": "Buenos Aires"
+}

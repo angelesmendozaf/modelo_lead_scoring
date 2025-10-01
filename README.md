@@ -1,113 +1,109 @@
-# Lead Scoring & Cross-Selling ML
+# Cross-Selling model
 
-Este proyecto implementa un sistema de **Lead Scoring** y **Cross-Selling** utilizando **Python** y **Machine Learning**, con el objetivo de analizar leads de una compañía de seguros, predecir la probabilidad de conversión y estimar ingresos adicionales a partir de productos relacionados.
+Este proyecto implementa un sistema de **scoring** y **recomendación de productos de seguros** para clientes existentes, utilizando **Python** y **scikit-learn**.  
 
-## Estado del proyecto
-
-El proyecto está en desarrollo activo. Actualmente incluye:
-- Generación de datasets sintéticos realistas (con Faker y NumPy).
-- Preprocesamiento de datos para ML.
-- Entrenamiento de modelos supervisados.
-- Exportación del modelo entrenado en formato `.joblib`.
-- Scripts para predicción de nuevos leads.
+El modelo combina:
+- **Random Forest Regressor**: para calcular el **score del cliente** (0–100).
+- **Random Forest Classifier**: para predecir el **producto objetivo de cross-selling**.
 
 ---
 
-## Estructura
+## 📂 Estructura del proyecto
 
-    └── main/
-        ├── /csv/                                   # Datasets generados
-        ├── /leads/                                 # Modelos de prueba para comparaciones 
-        ├── /models/                                # Modelos entrenados en formato .joblib 
-        ├── generate_dataset.py                     # Generador de datasets
-        ├── predict_lead_balanced.py                # Script para hacer predicciones con leads nuevos v1
-        ├── predict_customer_scoring.py             # Script para hacer predicciones con leads nuevos v2
-        ├── train_logistic_model.py                 # Script de Regresión Logística balanceada
-        ├── train_modelv2.py                        # Script de entrenamiento de modelos v2
-        ├── requeriments.txt                        # Dependencias
-        └── README.md                               # Documentación del proyecto 
 
----
+mi_proyecto/
+│
+├── train.py # Script de entrenamiento del modelo
+├── predict.py # Script de predicción con un cliente
+├── models/ # Modelos entrenados guardados en formato .joblib
+│ └── modelo_cross_selling.joblib
+├── csv/ # Dataset de entrenamiento
+│ └── dataset_cross_selling.csv
+└── leads/ # Ejemplos de clientes en formato JSON
+├── lead_base.json
+├── lead_alto.json
+├── lead_bajo.json
+└── lead_random.json
 
-## Tecnologías utilizadas
-
-- **Python 3.10+**
-- **Faker** para generación de datos sintéticos
-- **Pandas** y **NumPy** para manipulación de datos
-- **Scikit-learn** para entrenamiento y evaluación de modelos
-- **Joblib** para serializar modelos
 
 ---
 
-## Cómo empezar
+## ⚙️ Requisitos
+- Python 3.9 o superior  
+- Librerías necesarias:
+  ```bash
+  pip install pandas numpy scikit-learn joblib
 
-1.  **Clona el repositorio**
+🏋️ Entrenamiento del modelo
 
-    ```bash
-    git clone https://github.com/angelesmendozaf/modelo_lead_scoring
-    ```
+Ejecutar el script de entrenamiento con el dataset:
 
-2.  **Abrir el proyecto**
+python train.py
 
-    ```bash
-    python -m venv venv
-    source venv/bin/activate     # Linux/Mac
-    venv\Scripts\activate        # Windows
-    ```
 
-3. Instalar dependencias
+También se pueden indicar rutas personalizadas:
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+python train.py --data ./csv/dataset_cross_selling.csv --output ./models/modelo_cross_selling.joblib
 
----
 
-## Uso del proyecto
+El proceso realiza lo siguiente:
 
-### 🔹Generar dataset
+Carga el dataset de clientes desde csv/.
 
-En caso de no tener ningun dataset generado. Ejecutar el generador de datos:
+Calcula la columna score_target aplicando reglas de negocio.
 
-    ```bash
-    python generate_dataset.py
-    ```
+Entrena dos modelos:
 
-Esto creará un CSV dentro de ./csv/.
+RandomForestRegressor para el score de cliente.
 
-### 🔹Entrenar el modelo
+RandomForestClassifier para el producto objetivo.
 
-Se selecciona un Script de entrenamiento para comenzar con el dataset ya listo.
-Ejemplo de uso:
+Evalúa el desempeño con métricas básicas.
 
-    ```bash
-    python train_modelv2.py --data "./csv/dataset_cross_selling_completo.csv" --output "./models/scoring_model_v2.joblib"
-    ```
-    
-Opciones disponibles:
-* --data: ruta al dataset de entrada
-* --output: ruta donde guardar el modelo entrenado
+Guarda el modelo entrenado en ./models/modelo_cross_selling.joblib.
 
-### 🔹Calcular score de cliente
+🔮 Predicción con un cliente
 
-Ejemplo de uso:
+Para ejecutar una predicción se debe proveer un archivo JSON con los datos de un cliente:
 
-    ```bash
-    python predict_customer_scoring.py --model ".\models\scoring_model_v2.joblib" --json-file ".\leads\lead1.json"
-    ```
-    
-Opciones disponibles:
-* --model: ruta al modelo de entrada
-* --jason-file: ruta del cliente a consultar
+python predict.py --lead ./leads/lead_base.json
 
----
 
-## Permisos y requisitos
+Ejemplo de salida:
 
-Este proyecto no requiere permisos especiales, solo:
-* **Python 3.10+**
-* Librerías listadas en requirements.txt
+=== RESULTADO DE PREDICCIÓN ===
+Score: 62.4 → Apto (medio)
+Productos recomendados: ['hogar', 'vida', 'salud']
+Probabilidades completas: {'auto': 0.01, 'hogar': 0.33, 'ninguno': 0.01, 'salud': 0.31, 'vida': 0.34}
 
-### Próximos pasos:
-* Añadir validaciones más estrictas en la generación de dataset.
-* Mejorar la calibración del modelo de probabilidad.
+📊 Lógica de negocio
+Score (0–100)
+
+No apto (0–40): no se recomienda ningún producto.
+
+Apto medio (41–70): se recomiendan hasta 3 productos válidos.
+
+Apto alto (71–100): se recomienda solo el producto con mayor probabilidad.
+
+Recomendación de productos
+
+Se filtran los productos que el cliente ya posee (tiene_auto, tiene_hogar, tiene_vida, tiene_salud).
+
+El modelo selecciona los productos válidos según el score y las probabilidades de clasificación.
+
+📁 Leads de prueba
+
+En la carpeta ./leads/ se incluyen archivos JSON listos para testear el modelo:
+
+lead_base.json: cliente de nivel medio.
+
+lead_alto.json: cliente premium con buen historial.
+
+lead_bajo.json: cliente con alto riesgo (no apto).
+
+lead_random.json: cliente promedio para testear variaciones.
+
+Ejemplo de ejecución:
+
+python predict.py --lead ./leads/lead_alto.json
+python predict.py --lead ./leads/lead_bajo.json
