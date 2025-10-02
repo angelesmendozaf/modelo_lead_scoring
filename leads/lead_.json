@@ -1,0 +1,23 @@
+{
+  "edad": 22,
+  "genero": "masculino",
+  "hijos": 0,
+  "vivienda_propia": 0,
+  "posee_auto": 0,
+  "antiguedad_cliente": 8,
+  "cantidad_polizas": 1,
+  "cuotas_impagas": 3,
+  "costo_mensual_total_seguro": 70000,
+  "suma_asegurada_total": 200000,
+  "prima_promedio": 70000,
+  "tiene_auto": 0,
+  "tiene_hogar": 0,
+  "tiene_vida": 0,
+  "tiene_salud": 1,
+  "cantidad_siniestros": 0,
+  "monto_promedio_siniestros": 0,
+  "dias_desde_ultimo_siniestro": 999,
+  "ocupacion": "desempleado",
+  "estado_civil": "soltero",
+  "provincia": "Buenos Aires"
+}

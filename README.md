@@ -12,17 +12,17 @@ El modelo combina:
 ```text
 mi_proyecto/
 │
-├── train.py                       # Script de entrenamiento del modelo
-├── predict.py                     # Script de predicción con un cliente
+├── train_model.py                       # Script de entrenamiento del modelo
+├── predict_test.py                     # Script de predicción con un cliente
 ├── models/                        # Modelos entrenados guardados en formato .joblib
 │   └── modelo_cross_selling.joblib
 ├── csv/                           # Dataset de entrenamiento
 │   └── dataset_cross_selling.csv
 └── leads/                         # Ejemplos de clientes en formato JSON
-    ├── lead_base.json
-    ├── lead_alto.json
-    ├── lead_bajo.json
-    └── lead_random.json
+    ├── lead_b.json
+    ├── lead_a.json
+    ├── lead.json
+    └── lead_medio.json
 ```
 
 ---
@@ -40,13 +40,13 @@ pip install pandas numpy scikit-learn joblib
 Ejecutar el script de entrenamiento con el dataset (usa las rutas por defecto):
 
 ```bash
-python train.py
+python train_model.py
 ```
 
 También se pueden indicar rutas personalizadas:
 
 ```bash
-python train.py --data ./csv/dataset_cross_selling.csv --output ./models/modelo_cross_selling.joblib
+python train_model.py --data ./csv/dataset_cross_selling.csv --output ./models/modelo_cross_selling.joblib
 ```
 
 Este proceso realiza lo siguiente:
@@ -64,7 +64,7 @@ Este proceso realiza lo siguiente:
 Para ejecutar una predicción se debe proveer un archivo JSON con los datos de un cliente:
 
 ```bash
-python predict.py --lead ./leads/lead_base.json
+python predict_test.py --lead ./leads/lead.json
 ```
 
 Ejemplo de salida:

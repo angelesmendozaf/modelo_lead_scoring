@@ -1,0 +1,23 @@
+{
+  "edad": 41,
+  "genero": "femenino",
+  "hijos": 1,
+  "vivienda_propia": 1,
+  "posee_auto": 0,
+  "antiguedad_cliente": 15,
+  "cantidad_polizas": 2,
+  "cuotas_impagas": 3,
+  "costo_mensual_total_seguro": 120000,
+  "suma_asegurada_total": 2000000,
+  "prima_promedio": 60000,
+  "tiene_auto": 0,
+  "tiene_hogar": 1,
+  "tiene_vida": 1,
+  "tiene_salud": 0,
+  "cantidad_siniestros": 1,
+  "monto_promedio_siniestros": 5000,
+  "dias_desde_ultimo_siniestro": 170,
+  "ocupacion": "empleado",
+  "estado_civil": "casado",
+  "provincia": "Santa Fe"
+}
