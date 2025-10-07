@@ -145,8 +145,8 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Entrena modelo de cross-selling con score + producto")
-    parser.add_argument("--data", default="./csv/dataset_cross_selling.csv", help="Ruta al dataset CSV")
-    parser.add_argument("--output", default="./models/modelo_cross_selling.joblib", help="Ruta del archivo .joblib")
+    parser.add_argument("--data", default="./csv/dataset_cross_selling_1.csv", help="Ruta al dataset CSV")
+    parser.add_argument("--output", default="./models/modelo_cross_selling_1.joblib", help="Ruta del archivo .joblib")
     args = parser.parse_args()
     main(args)
 

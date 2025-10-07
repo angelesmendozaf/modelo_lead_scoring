@@ -9,7 +9,7 @@ parser.add_argument("--lead", required=True, help="Ruta al archivo JSON del clie
 args = parser.parse_args()
 
 # === Cargar modelo entrenado ===
-bundle = joblib.load("./models/modelo_cross_selling.joblib")
+bundle = joblib.load("./models/modelo_cross_selling_1.joblib")
 
 model_score = bundle["model_score"]
 model_product = bundle["model_product"]

@@ -99,8 +99,8 @@ En la carpeta `./leads/` se incluyen archivos JSON listos para probar el modelo:
 
 Ejemplo de ejecución:
 ```bash
-python predict.py --lead ./leads/lead_alto.json
-python predict.py --lead ./leads/lead_bajo.json
+python predict_test.py --lead ./leads/lead_a.json
+python predict_test.py --lead ./leads/lead_b.json
 ```
 
 ---
